@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { UserService } from '../_services/user.service';
 import { UserAuthService } from '../_services/user-auth.service';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+declare var $: any;  
 
 @Component({
   selector: 'app-login',
@@ -9,7 +11,7 @@ import { UserAuthService } from '../_services/user-auth.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit{
-  constructor(private userService: UserService, userAuthService : UserAuthService){}
+  constructor(private userService: UserService, userAuthService : UserAuthService, private httpClient : HttpClient){}
 
 
 
@@ -27,12 +29,26 @@ export class LoginComponent implements OnInit{
 
 
   login(loginForm:NgForm){
-    this.userService.login(loginForm.value).subscribe(
-      response => {
-        console.log(response);
-  
+    var settings = {
+      "url": "http://localhost:9090/oauth/token",
+      "method": "POST",
+      "timeout": 0,
+      "headers": {
+        "Content-Type": "application/x-www-form-urlencoded",
+        "Authorization": "Basic c3ByaW5nLWJvb3QtcmVzdC1yZWFkLXdyaXRlLWNsaWVudDoxMjM="
+      },
+      "data": {
+        "client_id": "spring-boot-rest-read-write-client",
+        "grant_type": "password",
+        "username": "admin",
+        "password": "123"
       }
-    );
+    };
+    
+    $.ajax(settings).done(function (response:any) {
+      console.log(response);
+    });
+   
   }
 
 }
