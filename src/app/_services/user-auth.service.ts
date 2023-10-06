@@ -16,8 +16,8 @@ export class UserAuthService {
       return JSON.parse(rles||JSON.stringify([]));      
   }
 
-  public setToken(token : String){
-    localStorage.setItem('token', JSON.stringify(token));
+  public setToken(token :string){
+    localStorage.setItem('token', token);
   }
 
   public getToken(){
@@ -31,6 +31,33 @@ export class UserAuthService {
   public isLoggedIn(){
     return this.getRoles() && this.getToken() ;
   }
+
+  
+  public isMatched(allowedRoles:any) : Boolean{
+
+    let isMatched = false;
+
+    let userRoles = this.getRoles();
+
+    if(userRoles != null && userRoles){
+
+      for(let i= 0; i< userRoles.length; i++){
+
+        for(let j = 0; j <allowedRoles.length; j++){
+
+          if(userRoles[i] === allowedRoles[j]){
+            isMatched = true;
+           break;
+          }
+
+        }
+
+      }
+
+    }
+    return isMatched;
+  }
+
 
 }
 

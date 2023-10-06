@@ -7,11 +7,4 @@ import { HttpHeaderResponse } from '@angular/common/http';
 })
 export class UserService {
 
-  constructor(private httpClient : HttpClient) { }
-
-  BASE_URL = "http://localhost:9090";
-
-  public login(loginData:any){
-    return this.httpClient.post<any>(this.BASE_URL + '/oauth/token',loginData);
-  }
 }

@@ -10,17 +10,17 @@
           <a class="nav-link active" aria-current="page" routerLink="/home">Home</a>
         </li>  
         
-        <li class="nav-item">
+        <li *ngIf="isMatched(['ROLE_ADMIN'])" class="nav-item">
             <a class="nav-link active" aria-current="page" routerLink="/admin">Admin Dashboard</a>
           </li>    
 
-          <li class="nav-item">
+          <li *ngIf="isMatched(['ROLE_USER'])" class="nav-item">
             <a class="nav-link active" aria-current="page" routerLink="/user">User Dashboard</a>
           </li>    
       </ul>
 
-      <button type="button" class="btn btn-success" routerLink="/login">Login</button>
-      <button type="button" class="btn btn-danger" routerLink="/forbidden">Logout</button>
+      <button *ngIf="! isLoggedIn()" type="button" class="btn btn-success" routerLink="/login">Login</button>
+      <button *ngIf="isLoggedIn()" type="button" class="btn btn-danger" (click) = "logout()" >Logout</button>
     </div>
   </div>
 </nav>

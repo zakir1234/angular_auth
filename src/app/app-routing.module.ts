@@ -5,13 +5,14 @@ import { AdminComponent } from './admin/admin.component';
 import { UserComponent } from './user/user.component';
 import { LoginComponent } from './login/login.component';
 import { ForbiddenComponent } from './forbidden/forbidden.component';
+import { authGuard } from './_auth/auth.guard';
 
 const routes: Routes = [
 {path:'home', component:HomeComponent},
-{path:'admin', component:AdminComponent},
-{path:'user', component:UserComponent},
+{path:'admin', component:AdminComponent, canActivate:[authGuard], data:{roles:['ROLE_ADMIN']}},
+{path:'user', component:UserComponent, canActivate:[authGuard], data:{roles:['ROLE_USER']}},
 {path:'login', component:LoginComponent},
-{path:'forbidden', component:ForbiddenComponent},
+{path:'forbidden', component:ForbiddenComponent}
 ]
 
 @NgModule({

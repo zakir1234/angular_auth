@@ -12,7 +12,9 @@ import { ForbiddenComponent } from './forbidden/forbidden.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
-declare var require: any;
+import { authGuard } from './_auth/auth.guard';
+
+declare var $: any;  
 
 @NgModule({
   declarations: [
@@ -31,7 +33,8 @@ declare var require: any;
     HttpClientModule,
     RouterModule
   ],
-  providers: [],
+  providers: [
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
